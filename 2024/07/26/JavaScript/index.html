@@ -1,0 +1,370 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>JavaScriptⅠ | Welcome,here is Mogu's Blog</title><meta name="author" content="Mogu"><meta name="copyright" content="Mogu"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Ⅰ.什么是JavaScript?web标准中提出网页由三部分组成  HTML：负责网页的基本结构（页面元素和内容） CSS：负责页面的表现效果（外观、位置等页面样式） JavaScript：负责页面的行为（交互效果）  类比一下就是： MC中 *这里有一个东西 HTML:“这是个物品” CSS:”这是个牛扒“ JavaScript:”可以吃耶，真不错” *这里又有一个东西 HTML:“这是个生物”">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScriptⅠ">
+<meta property="og:url" content="https://szymogu.github.io/2024/07/26/JavaScript/index.html">
+<meta property="og:site_name" content="Welcome,here is Mogu&#39;s Blog">
+<meta property="og:description" content="Ⅰ.什么是JavaScript?web标准中提出网页由三部分组成  HTML：负责网页的基本结构（页面元素和内容） CSS：负责页面的表现效果（外观、位置等页面样式） JavaScript：负责页面的行为（交互效果）  类比一下就是： MC中 *这里有一个东西 HTML:“这是个物品” CSS:”这是个牛扒“ JavaScript:”可以吃耶，真不错” *这里又有一个东西 HTML:“这是个生物”">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://szymogu.github.io/pic/default_cover/xuesheng.jpg">
+<meta property="article:published_time" content="2024-07-25T17:19:21.000Z">
+<meta property="article:modified_time" content="2024-07-26T15:56:12.954Z">
+<meta property="article:author" content="Mogu">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://szymogu.github.io/pic/default_cover/xuesheng.jpg"><link rel="shortcut icon" href="/pic/logo.png"><link rel="canonical" href="https://szymogu.github.io/2024/07/26/JavaScript/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"You have switched to Traditional Chinese","cht_to_chs":"You have switched to Simplified Chinese","day_to_night":"You have switched to Dark Mode","night_to_day":"You have switched to Light Mode","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'JavaScriptⅠ',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-07-26 23:56:12'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/card-bg.css"><link rel="stylesheet" href="/css/neon.css"><meta name="generator" content="Hexo 7.2.0"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+document.addEventListener('pjax:send', () => {
+  Pace.restart()
+})
+</script><link rel="stylesheet" href="/css/corner-indicator.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/touxiang.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> Gallery</span></a></li><li><a class="site-page child" href="/Java_Page/"><i class="fa-fw fas"></i><span> Test1</span></a></li><li><a class="site-page child" href="/Hexo_Page/"><i class="fa-fw fas"></i><span> Test2</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/pic/default_cover/xuesheng.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Welcome,here is Mogu's Blog"><span class="site-name">Welcome,here is Mogu's Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> Gallery</span></a></li><li><a class="site-page child" href="/Java_Page/"><i class="fa-fw fas"></i><span> Test1</span></a></li><li><a class="site-page child" href="/Hexo_Page/"><i class="fa-fw fas"></i><span> Test2</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">JavaScriptⅠ</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-07-25T17:19:21.000Z" title="Created 2024-07-26 01:19:21">2024-07-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-07-26T15:56:12.954Z" title="Updated 2024-07-26 23:56:12">2024-07-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%89%8D%E7%AB%AF/JavaScript/">JavaScript</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="JavaScriptⅠ"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="Ⅰ-什么是JavaScript"><a href="#Ⅰ-什么是JavaScript" class="headerlink" title="Ⅰ.什么是JavaScript?"></a>Ⅰ.什么是JavaScript?</h2><p>web标准中提出网页由三部分组成</p>
+<ol>
+<li><strong>HTML</strong>：负责网页的基本结构（页面元素和内容）</li>
+<li><strong>CSS</strong>：负责页面的表现效果（外观、位置等页面样式）</li>
+<li><strong>JavaScript</strong>：负责页面的行为（交互效果）</li>
+</ol>
+<p>类比一下就是：</p>
+<p>MC中</p>
+<p>*这里有一个东西</p>
+<p>HTML:“这是个物品”</p>
+<p>CSS:”这是个牛扒“</p>
+<p>JavaScript:”可以吃耶，真不错”</p>
+<p>*这里又有一个东西</p>
+<p>HTML:“这是个生物”</p>
+<p>CSS:”这是个creeper，长得真别致“</p>
+<p>JavaScript:”*你被炸死了——他会爆炸”</p>
+<p>这个时候你知道了，JavaScript,也就是本专题的主角，<strong>是网页的灵魂</strong>，它能为网页提供很多有趣的行为，让网页”活“起来。</p>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>跨平台</li>
+<li>面向对象</li>
+<li>脚本语言：不需要编译，经过浏览器解释即可直接运行，简化开发过程</li>
+</ul>
+<hr>
+<h2 id="Ⅱ-引入方式"><a href="#Ⅱ-引入方式" class="headerlink" title="Ⅱ.引入方式"></a>Ⅱ.引入方式</h2><h3 id="1-内部脚本"><a href="#1-内部脚本" class="headerlink" title="1.内部脚本"></a>1.内部脚本</h3><ul>
+<li>js代码必须位于<em>script</em>标签之内</li>
+<li>在HTML文档中，可以在<strong>任意地方</strong>，放置<strong>任意数量</strong>的<em>script</em>标签</li>
+<li>一般会把脚本置于<em>body</em>标签元素的底部，这样可以改善显示速度</li>
+</ul>
+<p>ep:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    alert(&quot;Hello JavaScript&quot;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-外部脚本"><a href="#2-外部脚本" class="headerlink" title="2.外部脚本"></a>2.外部脚本</h3><ul>
+<li>外部js文件中，只包含js代码，不包含<em>script</em>标签</li>
+<li><em>script</em>标签不能自闭合</li>
+</ul>
+<p>ep:</p>
+<p>页面：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;js/demo.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>外部文件：demo.js:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert(&quot;Hello JavaScript&quot;)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Ⅲ-基础语法"><a href="#Ⅲ-基础语法" class="headerlink" title="Ⅲ.基础语法"></a>Ⅲ.基础语法</h2><h3 id="1-书写语法"><a href="#1-书写语法" class="headerlink" title="1.书写语法"></a>1.书写语法</h3><h4 id="语法规则"><a href="#语法规则" class="headerlink" title="语法规则"></a>语法规则</h4><ul>
+<li>区分大小写</li>
+<li>结尾分号可有可无</li>
+<li>注释（行&#x2F;&#x2F; ；块&#x2F;**&#x2F;）</li>
+<li>大括号”{}”表示代码块</li>
+</ul>
+<h4 id="输出语句"><a href="#输出语句" class="headerlink" title="输出语句"></a>输出语句</h4><ul>
+<li><p><code>window.alert()/alert()</code></p>
+<p>写入警告框——浏览器弹出警告窗</p>
+</li>
+<li><p><code>document.write()</code></p>
+<p>写入HTML输出——写入HTML,在浏览器页面中显示</p>
+</li>
+<li><p><code>console.log()</code></p>
+<p>写入浏览器控制台——写入浏览器控制台</p>
+</li>
+</ul>
+<h3 id="2-变量"><a href="#2-变量" class="headerlink" title="2.变量"></a>2.变量</h3><p>1.js是<strong>弱类型语言</strong>——变量可以存放不同类型的值</p>
+<p>2.js中使用var关键字声明变量</p>
+<blockquote>
+<p>[!NOTE]</p>
+<p>var即variable:变量</p>
+<p>声明的均为全局变量</p>
+<p>变量可以重定义</p>
+</blockquote>
+<blockquote>
+<p>[!IMPORTANT]</p>
+<p>ECMAScript 6 中：</p>
+<p>新增<em><strong>let</strong></em>关键字,定义局部变量（仅let所在代码块内有效），且不允许重复声明</p>
+<p>新增<em><strong>const</strong></em>关键字，声明一个只读常量，不可改变</p>
+</blockquote>
+<p>3.变量名需要遵循以下规则：</p>
+<ul>
+<li>不以数字开头</li>
+<li>任意字符组成</li>
+<li>建议用驼峰法命名</li>
+</ul>
+<blockquote>
+<p>[!NOTE]</p>
+<p>驼峰命名法：组成名称的多个单词除第一个首字母小写，其余的首字母大写</p>
+</blockquote>
+<h3 id="3-数据类型、运算符、流程控制语句"><a href="#3-数据类型、运算符、流程控制语句" class="headerlink" title="3.数据类型、运算符、流程控制语句"></a>3.数据类型、运算符、流程控制语句</h3><h4 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h4><p>js中有两种数据类型：<strong>原始类型</strong>和<strong>引用类型</strong></p>
+<h5 id="原始类型"><a href="#原始类型" class="headerlink" title="原始类型"></a>原始类型</h5><ul>
+<li>number：数字</li>
+<li>string：字符串</li>
+<li>boolean：布尔</li>
+<li>null：对象为空</li>
+<li>undefined：当声明的变量未初始化时，该变量的默认值是undefined</li>
+</ul>
+<blockquote>
+<p>[!TIP]</p>
+<p>使用typeof运算符可以获取数据类型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var a = 20;</span><br><span class="line"></span><br><span class="line">alert(typeof a);</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h4><p>js中的运算符与java</p>
+<h5 id="完全一样！"><a href="#完全一样！" class="headerlink" title="完全一样！"></a><del>完全一样！</del></h5><p>唯一差别：js中有&#x3D;&#x3D;&#x3D;,名为全等运算符</p>
+<p>&#x3D;&#x3D;在比较时，会进行类型转换，即转换成同类型数据后才进行比较</p>
+<p>&#x3D;&#x3D;&#x3D;在比较时，不会进行类型转换，类型不同会直接返回false</p>
+<p>ep:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var a = 10</span><br><span class="line"></span><br><span class="line">alert(a == &quot;10&quot;)    //true</span><br><span class="line"></span><br><span class="line">alert(a == 10)         //true</span><br><span class="line"></span><br><span class="line">alert(a ===&quot;10&quot;)    //false</span><br></pre></td></tr></table></figure>
+
+<h5 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h5><p>字符串&gt;&gt;数字：</p>
+<p>将字符串字面值转为数字，如果字面值不是数字，则转为NaN</p>
+<blockquote>
+<p>[!TIP]</p>
+<p>使用了全局方法parseInt()</p>
+<p>从第一个字符开始匹配直到最后一个是数字的字符</p>
+<p>返回这个数字串的值</p>
+<p>否则返回NaN(Not a Number)</p>
+</blockquote>
+<p>其他类型&gt;&gt;boolean</p>
+<ul>
+<li>number 0&amp;NaN:false &#x2F;其他:true</li>
+<li>string 空字符:false &#x2F;其他:true</li>
+<li>null&amp;undefined 直接转为false</li>
+</ul>
+<h4 id="流程控制语句"><a href="#流程控制语句" class="headerlink" title="流程控制语句"></a>流程控制语句</h4><p>流程控制语句包括条件，循环，跳转等，是用于控制程序执行流程的。</p>
+<p>怎么又跟java一样啊！！</p>
+<p>在这放一些官方的文档吧</p>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/js/js-statements.html">JavaScript 语句 | 菜鸟教程 (runoob.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_statements.asp">JavaScript 语句参考手册 (w3school.com.cn)</a></p>
+<p>点开就发现</p>
+<p><del>白点了！！</del></p>
+<hr>
+<h2 id="Ⅳ-函数"><a href="#Ⅳ-函数" class="headerlink" title="Ⅳ.函数"></a>Ⅳ.函数</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>函数（方法）是被设计为执行特定任务的代码块</p>
+<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>方式一：js的函数通过<em>function</em>关键字进行定义，如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function functionName()&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>方式二：将函数赋值给变量，如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var functionName = function()&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h3><p>形参不需要提供类型，因为js是弱类型语言</p>
+<p>返回值同样不需要提供类型</p>
+<h3 id="调用"><a href="#调用" class="headerlink" title="调用"></a>调用</h3><p>使用函数名</p>
+<hr>
+<ul>
+<li>hexo渲染限制</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://szymogu.github.io">Mogu</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://szymogu.github.io/2024/07/26/JavaScript/">https://szymogu.github.io/2024/07/26/JavaScript/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/JavaScript/">JavaScript</a></div><div class="post_share"><div class="social-share" data-image="/pic/default_cover/xuesheng.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/07/26/Vue/" title="Vue"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/baizi.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">Vue</div></div></a></div><div class="next-post pull-right"><a href="/2024/07/26/JavaScript2/" title="JavaScriptⅡ"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/hamigua.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next</div><div class="next_info">JavaScriptⅡ</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2024/07/26/JavaScript2/" title="JavaScriptⅡ"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/hamigua.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-26</div><div class="title">JavaScriptⅡ</div></div></a></div><div><a href="/2024/07/26/JavaScript3/" title="JavaScriptⅢ"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/xuesheng.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-26</div><div class="title">JavaScriptⅢ</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/touxiang.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Mogu</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Szymogu"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%85%A0-%E4%BB%80%E4%B9%88%E6%98%AFJavaScript"><span class="toc-number">1.</span> <span class="toc-text">Ⅰ.什么是JavaScript?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E7%82%B9"><span class="toc-number">1.1.</span> <span class="toc-text">特点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%85%A1-%E5%BC%95%E5%85%A5%E6%96%B9%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">Ⅱ.引入方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%86%85%E9%83%A8%E8%84%9A%E6%9C%AC"><span class="toc-number">2.1.</span> <span class="toc-text">1.内部脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%A4%96%E9%83%A8%E8%84%9A%E6%9C%AC"><span class="toc-number">2.2.</span> <span class="toc-text">2.外部脚本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%85%A2-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">Ⅲ.基础语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%B9%A6%E5%86%99%E8%AF%AD%E6%B3%95"><span class="toc-number">3.1.</span> <span class="toc-text">1.书写语法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95%E8%A7%84%E5%88%99"><span class="toc-number">3.1.1.</span> <span class="toc-text">语法规则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E8%AF%AD%E5%8F%A5"><span class="toc-number">3.1.2.</span> <span class="toc-text">输出语句</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%8F%98%E9%87%8F"><span class="toc-number">3.2.</span> <span class="toc-text">2.变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E3%80%81%E8%BF%90%E7%AE%97%E7%AC%A6%E3%80%81%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5"><span class="toc-number">3.3.</span> <span class="toc-text">3.数据类型、运算符、流程控制语句</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">3.3.1.</span> <span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8E%9F%E5%A7%8B%E7%B1%BB%E5%9E%8B"><span class="toc-number">3.3.1.1.</span> <span class="toc-text">原始类型</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">3.3.2.</span> <span class="toc-text">运算符</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%8C%E5%85%A8%E4%B8%80%E6%A0%B7%EF%BC%81"><span class="toc-number">3.3.2.1.</span> <span class="toc-text">完全一样！</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-number">3.3.2.2.</span> <span class="toc-text">类型转换</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5"><span class="toc-number">3.3.3.</span> <span class="toc-text">流程控制语句</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%85%A3-%E5%87%BD%E6%95%B0"><span class="toc-number">4.</span> <span class="toc-text">Ⅳ.函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">4.1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">4.2.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E7%82%B9-1"><span class="toc-number">4.3.</span> <span class="toc-text">特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E7%94%A8"><span class="toc-number">4.4.</span> <span class="toc-text">调用</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/07/26/Vue/" title="Vue"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/baizi.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Vue"/></a><div class="content"><a class="title" href="/2024/07/26/Vue/" title="Vue">Vue</a><time datetime="2024-07-26T15:37:43.000Z" title="Created 2024-07-26 23:37:43">2024-07-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/26/JavaScript/" title="JavaScriptⅠ"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/xuesheng.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JavaScriptⅠ"/></a><div class="content"><a class="title" href="/2024/07/26/JavaScript/" title="JavaScriptⅠ">JavaScriptⅠ</a><time datetime="2024-07-25T17:19:21.000Z" title="Created 2024-07-26 01:19:21">2024-07-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/26/JavaScript2/" title="JavaScriptⅡ"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/hamigua.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JavaScriptⅡ"/></a><div class="content"><a class="title" href="/2024/07/26/JavaScript2/" title="JavaScriptⅡ">JavaScriptⅡ</a><time datetime="2024-07-25T17:19:21.000Z" title="Created 2024-07-26 01:19:21">2024-07-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/26/JavaScript3/" title="JavaScriptⅢ"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/xuesheng.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JavaScriptⅢ"/></a><div class="content"><a class="title" href="/2024/07/26/JavaScript3/" title="JavaScriptⅢ">JavaScriptⅢ</a><time datetime="2024-07-25T17:19:21.000Z" title="Created 2024-07-26 01:19:21">2024-07-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/06/25/%E5%86%85%E9%83%A8%E7%B1%BB/" title="内部类"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/baizi.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="内部类"/></a><div class="content"><a class="title" href="/2024/06/25/%E5%86%85%E9%83%A8%E7%B1%BB/" title="内部类">内部类</a><time datetime="2024-06-24T20:17:35.000Z" title="Created 2024-06-25 04:17:35">2024-06-25</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.8.8/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><div class="js-pjax"></div><div class="aplayer no-destroy" data-id="10187364968" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="false" mini = "true" order="random" data-theme="#87faac"> </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener
+  btf.removeGlobalFnEvent('pjax')
+  btf.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
