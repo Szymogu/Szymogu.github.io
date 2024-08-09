@@ -1,0 +1,7 @@
+#page-header {
+    background-color: rgba(102, 194, 247, 0.412) !important; /* 正确的RGBA格式 */
+}
+#page-header.post-bg {
+    height: 200px;
+  }
+
