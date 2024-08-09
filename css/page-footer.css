@@ -1,0 +1,9 @@
+
+#footer {
+    background-color:#74c6f952
+}
+[data-theme='dark'] {
+    #footer {
+    background-color:#1e151e52
+}
+}
