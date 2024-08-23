@@ -1,0 +1,422 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>分层解耦 | Welcome,here is Mogu's Blog</title><meta name="author" content="Mogu"><meta name="copyright" content="Mogu"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="了解&amp;解决耦合问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分层解耦">
+<meta property="og:url" content="https://szymogu.github.io/2024/08/24/%E5%88%86%E5%B1%82%E8%A7%A3%E8%80%A6/index.html">
+<meta property="og:site_name" content="Welcome,here is Mogu&#39;s Blog">
+<meta property="og:description" content="了解&amp;解决耦合问题">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://szymogu.github.io/pic/default_cover/424358.png">
+<meta property="article:published_time" content="2024-08-23T19:08:36.000Z">
+<meta property="article:modified_time" content="2024-08-23T19:11:55.627Z">
+<meta property="article:author" content="Mogu">
+<meta property="article:tag" content="面向接口">
+<meta property="article:tag" content="内聚&amp;耦合">
+<meta property="article:tag" content="IoC&amp;DI">
+<meta property="article:tag" content="单例模式">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://szymogu.github.io/pic/default_cover/424358.png"><link rel="shortcut icon" href="/pic/logo.png"><link rel="canonical" href="https://szymogu.github.io/2024/08/24/%E5%88%86%E5%B1%82%E8%A7%A3%E8%80%A6/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://chinese-fonts-cdn.deno.dev/packages/jnjj/dist/JUNJUN/result.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"You have switched to Traditional Chinese","cht_to_chs":"You have switched to Simplified Chinese","day_to_night":"You have switched to Dark Mode","night_to_day":"You have switched to Light Mode","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '分层解耦',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-08-24 03:11:55'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/card-bg.css"><link rel="stylesheet" href="/css/neon.css"><link rel="stylesheet" href="/css/page-header.css"><link rel="stylesheet" href="/css/page-footer.css"><meta name="generator" content="Hexo 7.2.0"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+document.addEventListener('pjax:send', () => {
+  Pace.restart()
+})
+</script><link rel="stylesheet" href="/css/corner-indicator.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/touxiang.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">25</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">50</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">12</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> Gallery</span></a></li><li><a class="site-page child" href="/Java_Page/"><i class="fa-fw fas"></i><span> Test1</span></a></li><li><a class="site-page child" href="/Hexo_Page/"><i class="fa-fw fas"></i><span> Test2</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/pic/default_cover/424358.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Welcome,here is Mogu's Blog"><span class="site-name">Welcome,here is Mogu's Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> Gallery</span></a></li><li><a class="site-page child" href="/Java_Page/"><i class="fa-fw fas"></i><span> Test1</span></a></li><li><a class="site-page child" href="/Hexo_Page/"><i class="fa-fw fas"></i><span> Test2</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">分层解耦</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-08-23T19:08:36.000Z" title="Created 2024-08-24 03:08:36">2024-08-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-08-23T19:11:55.627Z" title="Updated 2024-08-24 03:11:55">2024-08-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Web%E5%90%8E%E7%AB%AF/">Web后端</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="分层解耦"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="分层解耦"><a href="#分层解耦" class="headerlink" title="分层解耦"></a>分层解耦</h1><p>在上一个demo程序中，请求处理类完成了从接收到处理最后返回的所有功能，其实这样是不利于代码复用和项目维护的，类应该满足<strong>单一职责原则</strong>（Single Responsibility Principle，简称SRP），一个类应该只负责一项任务或者功能，这样做有以下好处</p>
+<ul>
+<li><strong>降低耦合度</strong>：类与类之间的依赖关系减少，系统各部分之间的耦合度降低。</li>
+<li><strong>提高可读性</strong>：每个类负责一项明确的任务，使得代码更易于理解和维护。</li>
+<li><strong>增强可维护性</strong>：当需要修改功能时，只需要关注一个类，而不是多个类。</li>
+<li><strong>简化测试</strong>：针对单一职责编写测试用例更为简单，因为涉及的逻辑更少</li>
+</ul>
+<p>因此，请求处理类中应避免耦合逻辑处理代码，类似的，对一个应用来说，应该分出三个逻辑层次，这种软件架构模式称为<strong>三层架构</strong></p>
+<h2 id="三层架构"><a href="#三层架构" class="headerlink" title="三层架构"></a>三层架构</h2><p>一种软件架构模式</p>
+<ol>
+<li><p><strong>表示层（Presentation Layer）</strong>：负责与用户交互的界面部分，展示数据给用户并接收用户的输入。在Web应用中，这一层通常由HTML、CSS和JavaScript等前端技术实现。</p>
+</li>
+<li><p><strong>业务逻辑层（Business Logic Layer）</strong>：处理应用程序的核心业务逻辑，即应用程序的“大脑”。这一层不直接与用户交互，也不直接与数据库交互，而是处理来自表示层的请求，执行业务规则，然后返回结果。</p>
+</li>
+<li><p><strong>数据访问层（Data Access Layer）</strong>：负责与数据库进行交互，执行数据的增删改查（CRUD）操作。这一层将业务逻辑层的请求转换为数据库可以理解的查询语言，并将查询结果返回给业务逻辑层。</p>
+</li>
+</ol>
+<p>对于demo程序，三层架构就为</p>
+<ol>
+<li><strong>Controller（控制层）</strong>：</li>
+</ol>
+<ul>
+<li>位于表示层，是用户与应用程序交互的入口点。</li>
+<li>负责接收用户的输入，调用业务逻辑层的代码，并返回响应结果给用户。</li>
+<li>处理HTTP请求和响应，例如解析用户提交的表单数据，调用服务层方法，并渲染视图。</li>
+</ul>
+<ol start="2">
+<li><strong>Service（服务层或业务逻辑层）</strong>：</li>
+</ol>
+<ul>
+<li>位于业务逻辑层，是应用程序的核心，实现具体的业务逻辑。</li>
+<li>作为中介层，协调数据访问层和控制层的交互，封装业务逻辑。</li>
+<li>可以包含业务规则、算法和计算，处理控制层传来的请求，调用数据访问层进行数据操作，并将结果返回给控制层。</li>
+</ul>
+<ol start="3">
+<li><strong>DAO（数据访问对象，Data Access Object）</strong>：</li>
+</ol>
+<ul>
+<li>位于数据访问层，是与数据库交互的代码接口。</li>
+<li>负责创建和执行数据库查询，以及将数据库中的记录映射到java对象。</li>
+<li>封装了所有与数据库相关的操作，如CRUD（创建、读取、更新、删除）操作，使得业务逻辑层不需要关心具体的数据库操作细节。</li>
+</ul>
+<p>这三层之间的关系通常是这样的：</p>
+<ul>
+<li>用户发送请求</li>
+<li>Controller接收请求后，调用Service层的方法</li>
+<li>Service层可能需要数据，于是调用DAO层的代码来获取或更新数据</li>
+<li>DAO层执行数据库操作，并将结果返回给Service层</li>
+<li>Service层处理完业务逻辑后，将结果返回给Controller</li>
+<li>Controller根据结果渲染视图或重定向，将响应发送回用户</li>
+</ul>
+<p>根据该架构，将Controller类拆分出Service层，Dao层</p>
+<h3 id="Dao"><a href="#Dao" class="headerlink" title="Dao"></a>Dao</h3><p>这一层用于数据查询与简单处理，使用面向接口思想，先完成接口设计，再添加接口的实现类</p>
+<p>创建包Dao，用于数据管理</p>
+<p>分析需求，Dao类需要提供一个包含员工数据的链表</p>
+<p>创建接口EmpDao</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.springbootdemo.dao;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.springbootdemo.pojo.Emp;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">EmpDao</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;Emp&gt; <span class="title function_">listEmp</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>完成接口实现类</p>
+<p>思考实现方式，动态定位资源，解析xml文件并存于链表</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.springbootdemo.dao.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.springbootdemo.dao.EmpDao;</span><br><span class="line"><span class="keyword">import</span> com.springbootdemo.pojo.Emp;</span><br><span class="line"><span class="keyword">import</span> com.springbootdemo.utils.XmlParserUtils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">EmpDaoA</span> <span class="keyword">implements</span> <span class="title class_">EmpDao</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;Emp&gt; <span class="title function_">listEmp</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">file</span> <span class="operator">=</span> <span class="built_in">this</span>.getClass().getClassLoader().getResource(<span class="string">&quot;emp.xml&quot;</span>).getFile();</span><br><span class="line">        System.out.println(file);</span><br><span class="line">        List&lt;Emp&gt; empList= XmlParserUtils.parse(file, Emp.class);</span><br><span class="line">        <span class="keyword">return</span> empList;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h3><p>这一层用于完成逻辑，如果将逻辑抽象成一种操作，一个后端程序肯定要提供多种操作，因此使用<strong>面向接口</strong>编程思想，接口内部可以使用不同的实现方式，上层可以不用管其内部</p>
+<p>创建包service，里面是项目的逻辑模块</p>
+<p>分析需求，service类需要返回一个可直接展示的员工数据</p>
+<p>创建接口EmpService</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.springbootdemo.service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.springbootdemo.pojo.Emp;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">EmpService</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;Emp&gt; <span class="title function_">ListEmp</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>创建接口的实现类EmpServiceA，将service下的所有实现类放在一个包impl中</p>
+<p>这个实现类最终实现返回一个含员工数据的链表，其中的实现方式为</p>
+<ol>
+<li><p>需要获取数据，关乎Dao层，因此创建数据访问层对象empDao，这个对象管理了一个项目中的数据，通过其获得员工数据</p>
+</li>
+<li><p>处理数据，将编号转换为名称</p>
+</li>
+<li><p>返回到控制层</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.springbootdemo.service.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.springbootdemo.dao.EmpDao;</span><br><span class="line"><span class="keyword">import</span> com.springbootdemo.dao.impl.EmpDaoA;</span><br><span class="line"><span class="keyword">import</span> com.springbootdemo.pojo.Emp;</span><br><span class="line"><span class="keyword">import</span> com.springbootdemo.service.EmpService;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">EmpServiceA</span> <span class="keyword">implements</span> <span class="title class_">EmpService</span> &#123;</span><br><span class="line">    <span class="type">EmpDao</span> <span class="variable">empDao</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">EmpDaoA</span>();<span class="comment">//这种逻辑处理方法需要使用Dao层，因此需创建Dao层对象</span></span><br><span class="line">    List&lt;Emp&gt; empList = empDao.listEmp();<span class="comment">//通过Dao层返回List类型员工数据</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;Emp&gt; <span class="title function_">ListEmp</span><span class="params">()</span> &#123;</span><br><span class="line">        empList.stream().forEach(emp-&gt;&#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">gender</span> <span class="operator">=</span> emp.getGender();</span><br><span class="line">            <span class="keyword">if</span>(gender.equals(<span class="string">&quot;1&quot;</span>))&#123;</span><br><span class="line">                emp.setGender(<span class="string">&quot;man&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(gender.equals(<span class="string">&quot;2&quot;</span>))&#123;</span><br><span class="line">                emp.setGender(<span class="string">&quot;woman&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        empList.stream().forEach(emp-&gt;&#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">job</span> <span class="operator">=</span> emp.getJob();</span><br><span class="line">            <span class="keyword">if</span>(job.equals(<span class="string">&quot;1&quot;</span>))&#123;</span><br><span class="line">                emp.setJob(<span class="string">&quot;讲师&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(job.equals(<span class="string">&quot;2&quot;</span>))&#123;</span><br><span class="line">                emp.setJob(<span class="string">&quot;班主任&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(job.equals(<span class="string">&quot;3&quot;</span>))&#123;</span><br><span class="line">                emp.setJob(<span class="string">&quot;就业指导&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> empList;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Controller"><a href="#Controller" class="headerlink" title="Controller"></a>Controller</h3><p>接收请求，调用逻辑层，并返回响应</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.springbootdemo.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.springbootdemo.pojo.Emp;</span><br><span class="line"><span class="keyword">import</span> com.springbootdemo.pojo.Result;</span><br><span class="line"><span class="keyword">import</span> com.springbootdemo.service.EmpService;</span><br><span class="line"><span class="keyword">import</span> com.springbootdemo.service.impl.EmpServiceA;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Controller</span> &#123;</span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/listEmp&quot;)</span><span class="comment">//使用Controller接收请求</span></span><br><span class="line">    <span class="keyword">public</span> Result <span class="title function_">listEmp</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">EmpService</span> <span class="variable">empService</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">EmpServiceA</span>();<span class="comment">//使用Service处理逻辑</span></span><br><span class="line">        List&lt;Emp&gt; empList = empService.ListEmp();</span><br><span class="line">        <span class="keyword">return</span> Result.success(empList);<span class="comment">//统一响应</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>三层架构是Web开发的一个标准，修改之后的代码相比之前具有复用性强，便于维护，利于扩展的优点</p>
+<blockquote>
+<p>在EmpServiceA类中有这样一行代码</p>
+<p>EmpDao empDao &#x3D; new EmpDaoA();</p>
+<p>EmpDao是一个接口，EmpDaoA是这个接口的实现类，这里通过接口引用指向了其实现类对象。这个用法是多态的一种体现：使用一个统一的接口来处理不同类型的对象（实现类）</p>
+</blockquote>
+<h2 id="内聚-耦合"><a href="#内聚-耦合" class="headerlink" title="内聚&amp;耦合"></a>内聚&amp;耦合</h2><p>在软件开发中有一个设计原则：高内聚低耦合</p>
+<p>内聚：指软件中各个功能模块内部的功能联系，简单理解为一个模块只负责一项任务或者功能</p>
+<p>耦合：衡量软件中各个层&#x2F;模块之间的联系、关联程度，简单理解为某个模块的修改对项目其他模块的影响。</p>
+<p>高内聚就是让模块的功能更单一，这样利于代码复用，低耦合就是要降低模块之间依赖程度，利于代码的维护。</p>
+<h2 id="解耦合"><a href="#解耦合" class="headerlink" title="解耦合"></a>解耦合</h2><p>如何降低程序中各个组件之间的耦合度，这里需要提到两个概念</p>
+<h3 id="IOC-DI"><a href="#IOC-DI" class="headerlink" title="IOC&amp;DI"></a>IOC&amp;DI</h3><ul>
+<li>控制反转(Inversion Of Control)，简称IOC。对象的创建控制权由程序自身转移到外部(容器)，这种思想称为控制反转</li>
+</ul>
+<p>在传统的程序设计中，组件之间的依赖关系是由组件自身在内部创建或查找其依赖项来实现的。而控制反转则是将这种依赖关系的创建和查找工作转交给外部容器来管理。</p>
+<ul>
+<li>依赖注入(Dependency Injection)，简称DI。容器为应用程序提供运行时所依赖的资源，称之为依赖注入</li>
+</ul>
+<p>依赖注入是实现控制反转的一种具体手段。它指的是组件之间的依赖关系不是由组件自己创建，而是由外部容器在创建组件时注入所需的依赖项。</p>
+<p>例：来看看代码中的耦合</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">EmpService</span> <span class="variable">empService</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">EmpServiceA</span>();</span><br></pre></td></tr></table></figure>
+
+<p>在demo程序中请求处理需要使用逻辑层，因此在类中调用逻辑层的构造方法，直接创建了empService对象，这里就产生了耦合，如果逻辑层的代码变更，如需更换实现类，控制层中的请求处理类也要做改动</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Controller</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">EmpService</span> <span class="variable">empService</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">EmpServiceA</span>();<span class="comment">//与逻辑层产生耦合</span></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/listEmp&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Result <span class="title function_">listEmp</span><span class="params">()</span>&#123;</span><br><span class="line">        List&lt;Emp&gt; empList = empService.ListEmp();</span><br><span class="line">        <span class="keyword">return</span> Result.success(empList);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运用控制反转思想，这里应该使用一个外部容器创建对象，而不是在当前类中，使用时再通过依赖注入从容器中为程序提供指定对象，也就是说：<strong>我们要拒绝使用new关键字</strong>👇</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Controller</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> EmpService empService;</span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/listEmp&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Result <span class="title function_">listEmp</span><span class="params">()</span>&#123;</span><br><span class="line">        List&lt;Emp&gt; empList = empService.ListEmp();</span><br><span class="line">        <span class="keyword">return</span> Result.success(empList);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>不使用new？那对象从哪来，外部容器又在哪里，注入又如何实现</p>
+<p>Spring：欸🤓👆</p>
+<h3 id="Spring中的IOC-DI"><a href="#Spring中的IOC-DI" class="headerlink" title="Spring中的IOC&amp;DI"></a>Spring中的IOC&amp;DI</h3><p>在Java开发中，Spring框架是实现IOC和DI的一个典型例子。Spring容器负责管理对象的生命周期和依赖关系，开发者只需通过配置（XML或注解）来声明组件及其依赖关系，Spring容器会在应用启动时<strong>自动创建对象并注入依赖</strong>。</p>
+<p>也就是说，Spring框架提供了外部容器与注入功能，只需要在需要的地方添加相应注解就可以使用，当创建实例时，其所需对象会被自动创建并注入</p>
+<p>使用方法：两个注解</p>
+<ul>
+<li><p>Component：标记类为Bean对象，交予IOC容器管理</p>
+</li>
+<li><p>Autowired：使用依赖注入</p>
+</li>
+</ul>
+<blockquote>
+<p>Bean对象是IoC容器中创建、管理的对象</p>
+</blockquote>
+<p>例如，假设有两个类Service和Dependency，Service类需要使用Dependency类的功能。在不使用DI的情况下，Service类可能需要自己创建或查找Dependency的实例。使用DI后，Spring容器会在创建Service的实例时自动注入Dependency的实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span> </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Service</span> &#123;     </span><br><span class="line"><span class="keyword">private</span> Dependency dependency;     </span><br><span class="line"><span class="meta">@Autowired</span> <span class="comment">// 这是Spring的注解，用于自动装配依赖     </span></span><br><span class="line"><span class="keyword">public</span> <span class="title function_">Service</span><span class="params">(Dependency dependency)</span>&#123;         </span><br><span class="line"><span class="built_in">this</span>.dependency = dependency;<span class="comment">//将容器中的对象赋值给本类对象    </span></span><br><span class="line"> &#125;   </span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，Service类通过构造函数注入的方式获得了Dependency的实例，而不需要自己创建，这降低了类之间的耦合度。</p>
+<h4 id="IoC"><a href="#IoC" class="headerlink" title="IoC"></a>IoC</h4><p>1.三个Component的衍生注解</p>
+<ul>
+<li><p>Controller 标注控制器类</p>
+</li>
+<li><p>Service 标注逻辑类</p>
+</li>
+<li><p>Repository 标注数据访问类</p>
+</li>
+</ul>
+<p>当不属于上三类时，使用Component注解</p>
+<blockquote>
+<p>在添加Web依赖的SpringBoot项目中无法使用Component注解控制器</p>
+</blockquote>
+<p>2.注解后可以指定该bean对象在容器中的名字，默认为类名首字母小写</p>
+<p>Component(“name”)</p>
+<p>3.Bean组件扫描</p>
+<p>为一个类添加Bean注解后，将其放置在与项目包同级的另一个包内，发现项目报错，这是由于Bean组件的扫描机制</p>
+<p>声明Bean的注解要想生效，还需要添加组件扫描注解@ComponentScan，而在启动类中的注解@SpringBootApplication就包含了该注解，由于默认扫描的范围是启动类所在包及其子包，所以与启动类同级及以下（项目包）中的所有Bean注解均可以被扫描到</p>
+<p>对于上面那种情况，虽然可以更改扫描区域为项目包+其他区域：ComponentScan(“项目包名”,”区域名”)，但最好的解决方式还是将所有代码放在项目包中，由启动类自动扫描项目的所有文件</p>
+<h4 id="DI"><a href="#DI" class="headerlink" title="DI"></a>DI</h4><p>Autowired注解时，默认按照类型进行，无法同时注解多个相同类型bean</p>
+<p>同类型的bean存在多个怎么办</p>
+<p>添加：（这两个注解由spring提供）</p>
+<ul>
+<li><p>Primary：优先注解</p>
+</li>
+<li><p>Qualifier：指定bean名字：Qualifier(“name”)</p>
+</li>
+</ul>
+<p>修改：</p>
+<ul>
+<li>Resource：指定bean名字:Resource(name&#x3D;”name”)。由jdk提供，默认按名称注入</li>
+</ul>
+<p>返回我们的demo</p>
+<p>控制层程序Controller依赖逻辑层程序对象EmpServiceA，使用依赖注入提供EmpService的对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Controller</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> EmpService empService;</span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/listEmp&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Result <span class="title function_">listEmp</span><span class="params">()</span>&#123;</span><br><span class="line">        List&lt;Emp&gt; empList = empService.ListEmp();</span><br><span class="line">        <span class="keyword">return</span> Result.success(empList);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>逻辑层控制反转使用容器管理，同时依赖数据层对象EmpDaoA，使用依赖注入提供EmpDao的对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">EmpServiceA</span> <span class="keyword">implements</span> <span class="title class_">EmpService</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> EmpDao empDao;<span class="comment">//这种逻辑处理方法需要使用Dao层，因此需创建Dao层对象</span></span><br><span class="line">    List&lt;Emp&gt; empList = empDao.listEmp();<span class="comment">//通过Dao层返回List类型员工数据</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;Emp&gt; <span class="title function_">ListEmp</span><span class="params">()</span> &#123;</span><br><span class="line">        empList.stream().forEach(emp-&gt;&#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">gender</span> <span class="operator">=</span> emp.getGender();</span><br><span class="line">            <span class="keyword">if</span>(gender.equals(<span class="string">&quot;1&quot;</span>))&#123;</span><br><span class="line">                emp.setGender(<span class="string">&quot;man&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(gender.equals(<span class="string">&quot;2&quot;</span>))&#123;</span><br><span class="line">                emp.setGender(<span class="string">&quot;woman&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        empList.stream().forEach(emp-&gt;&#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">job</span> <span class="operator">=</span> emp.getJob();</span><br><span class="line">            <span class="keyword">if</span>(job.equals(<span class="string">&quot;1&quot;</span>))&#123;</span><br><span class="line">                emp.setJob(<span class="string">&quot;讲师&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(job.equals(<span class="string">&quot;2&quot;</span>))&#123;</span><br><span class="line">                emp.setJob(<span class="string">&quot;班主任&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(job.equals(<span class="string">&quot;3&quot;</span>))&#123;</span><br><span class="line">                emp.setJob(<span class="string">&quot;就业指导&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> empList;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>数据层使用容器管理</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Repository</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">EmpDaoA</span> <span class="keyword">implements</span> <span class="title class_">EmpDao</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;Emp&gt; <span class="title function_">listEmp</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">file</span> <span class="operator">=</span> <span class="built_in">this</span>.getClass().getClassLoader().getResource(<span class="string">&quot;emp.xml&quot;</span>).getFile();</span><br><span class="line">        System.out.println(file);</span><br><span class="line">        List&lt;Emp&gt; empList= XmlParserUtils.parse(file, Emp.class);</span><br><span class="line">        <span class="keyword">return</span> empList;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程序运行成功，哪里看出解耦了？</p>
+<p>假设需求变更，性别要展示中文（随便的例子）</p>
+<p>创建逻辑层实体对象EmpServiceB，完成新需求的逻辑，此时只需将该类标记为Bean对象，并将先前的EmpServiceA上的IOC注解删除，就完成了改动</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">EmpServiceB</span> <span class="keyword">implements</span> <span class="title class_">EmpService</span> &#123;</span><br><span class="line">    <span class="type">EmpDao</span> <span class="variable">empDao</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">EmpDaoA</span>();<span class="comment">//这种逻辑处理方法需要使用Dao层，因此需创建Dao层对象</span></span><br><span class="line">    List&lt;Emp&gt; empList = empDao.listEmp();<span class="comment">//通过Dao层返回List类型员工数据</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;Emp&gt; <span class="title function_">ListEmp</span><span class="params">()</span> &#123;</span><br><span class="line">        empList.stream().forEach(emp-&gt;&#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">gender</span> <span class="operator">=</span> emp.getGender();</span><br><span class="line">            <span class="keyword">if</span>(gender.equals(<span class="string">&quot;1&quot;</span>))&#123;</span><br><span class="line">                emp.setGender(<span class="string">&quot;男&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(gender.equals(<span class="string">&quot;2&quot;</span>))&#123;</span><br><span class="line">                emp.setGender(<span class="string">&quot;女&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        empList.stream().forEach(emp-&gt;&#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">job</span> <span class="operator">=</span> emp.getJob();</span><br><span class="line">            <span class="keyword">if</span>(job.equals(<span class="string">&quot;1&quot;</span>))&#123;</span><br><span class="line">                emp.setJob(<span class="string">&quot;讲师&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(job.equals(<span class="string">&quot;2&quot;</span>))&#123;</span><br><span class="line">                emp.setJob(<span class="string">&quot;班主任&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(job.equals(<span class="string">&quot;3&quot;</span>))&#123;</span><br><span class="line">                emp.setJob(<span class="string">&quot;就业指导&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> empList;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h4><p>为什么要取消旧类上的注解，因为两个类都可以提供EmpService的实例化对象，这样在依赖注入时就会产生冲突，这体现了IOC容器的一个特点：<strong>单例模式</strong></p>
+<p>单例模式（Singleton Pattern）是一种常用的软件设计模式，其核心思想是确保一个类只有一个实例，并提供一个全局访问点来获取这个实例</p>
+<p>由于IoC容器默认按照类型自动装配，只有每种类唯一，自动注入才能被实现</p>
+<hr>
+<ul>
+<li><p>面向接口</p>
+</li>
+<li><p>内聚&amp;耦合</p>
+</li>
+<li><p>控制反转&amp;依赖注入</p>
+</li>
+<li><p>单例模式</p>
+</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://szymogu.github.io">Mogu</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://szymogu.github.io/2024/08/24/%E5%88%86%E5%B1%82%E8%A7%A3%E8%80%A6/">https://szymogu.github.io/2024/08/24/%E5%88%86%E5%B1%82%E8%A7%A3%E8%80%A6/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%9D%A2%E5%90%91%E6%8E%A5%E5%8F%A3/">面向接口</a><a class="post-meta__tags" href="/tags/%E5%86%85%E8%81%9A-%E8%80%A6%E5%90%88/">内聚&amp;耦合</a><a class="post-meta__tags" href="/tags/IoC-DI/">IoC&amp;DI</a><a class="post-meta__tags" href="/tags/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">单例模式</a></div><div class="post_share"><div class="social-share" data-image="/pic/default_cover/424358.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/08/22/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E8%AF%B7%E6%B1%82%E4%B8%8E%E5%93%8D%E5%BA%94/" title="服务器的请求与响应"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/393992.png" onerror="onerror=null;src='https://i0.hdslb.com/bfs/static/laputa-search/assets/neterror.65668da4.png'" alt="cover of next post"><div class="pagination-info"><div class="label">Next</div><div class="next_info">服务器的请求与响应</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/touxiang.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Mogu</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">25</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">50</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">12</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Szymogu"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">I❤️BlueArchive！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%86%E5%B1%82%E8%A7%A3%E8%80%A6"><span class="toc-number">1.</span> <span class="toc-text">分层解耦</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E5%B1%82%E6%9E%B6%E6%9E%84"><span class="toc-number">1.1.</span> <span class="toc-text">三层架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Dao"><span class="toc-number">1.1.1.</span> <span class="toc-text">Dao</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Service"><span class="toc-number">1.1.2.</span> <span class="toc-text">Service</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Controller"><span class="toc-number">1.1.3.</span> <span class="toc-text">Controller</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E8%81%9A-%E8%80%A6%E5%90%88"><span class="toc-number">1.2.</span> <span class="toc-text">内聚&amp;耦合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E8%80%A6%E5%90%88"><span class="toc-number">1.3.</span> <span class="toc-text">解耦合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IOC-DI"><span class="toc-number">1.3.1.</span> <span class="toc-text">IOC&amp;DI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring%E4%B8%AD%E7%9A%84IOC-DI"><span class="toc-number">1.3.2.</span> <span class="toc-text">Spring中的IOC&amp;DI</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#IoC"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">IoC</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DI"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">DI</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.3.2.3.</span> <span class="toc-text">单例模式</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/08/24/%E5%88%86%E5%B1%82%E8%A7%A3%E8%80%A6/" title="分层解耦"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/424358.png" onerror="this.onerror=null;this.src='https://i0.hdslb.com/bfs/static/laputa-search/assets/neterror.65668da4.png'" alt="分层解耦"/></a><div class="content"><a class="title" href="/2024/08/24/%E5%88%86%E5%B1%82%E8%A7%A3%E8%80%A6/" title="分层解耦">分层解耦</a><time datetime="2024-08-23T19:08:36.000Z" title="Created 2024-08-24 03:08:36">2024-08-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/08/22/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E8%AF%B7%E6%B1%82%E4%B8%8E%E5%93%8D%E5%BA%94/" title="服务器的请求与响应"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/393992.png" onerror="this.onerror=null;this.src='https://i0.hdslb.com/bfs/static/laputa-search/assets/neterror.65668da4.png'" alt="服务器的请求与响应"/></a><div class="content"><a class="title" href="/2024/08/22/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E8%AF%B7%E6%B1%82%E4%B8%8E%E5%93%8D%E5%BA%94/" title="服务器的请求与响应">服务器的请求与响应</a><time datetime="2024-08-21T21:55:41.000Z" title="Created 2024-08-22 05:55:41">2024-08-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/08/18/Web%E5%90%8E%E7%AB%AF/" title="Web入门"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/367914.png" onerror="this.onerror=null;this.src='https://i0.hdslb.com/bfs/static/laputa-search/assets/neterror.65668da4.png'" alt="Web入门"/></a><div class="content"><a class="title" href="/2024/08/18/Web%E5%90%8E%E7%AB%AF/" title="Web入门">Web入门</a><time datetime="2024-08-18T09:34:32.000Z" title="Created 2024-08-18 17:34:32">2024-08-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/08/18/Junit/" title="Junit"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/569411.png" onerror="this.onerror=null;this.src='https://i0.hdslb.com/bfs/static/laputa-search/assets/neterror.65668da4.png'" alt="Junit"/></a><div class="content"><a class="title" href="/2024/08/18/Junit/" title="Junit">Junit</a><time datetime="2024-08-18T09:33:03.000Z" title="Created 2024-08-18 17:33:03">2024-08-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/08/10/Maven/" title="初识Maven"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/939416.png" onerror="this.onerror=null;this.src='https://i0.hdslb.com/bfs/static/laputa-search/assets/neterror.65668da4.png'" alt="初识Maven"/></a><div class="content"><a class="title" href="/2024/08/10/Maven/" title="初识Maven">初识Maven</a><time datetime="2024-08-10T03:40:48.000Z" title="Created 2024-08-10 11:40:48">2024-08-10</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.8.8/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><div class="js-pjax"></div><div class="aplayer no-destroy" data-id="10187364968" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="false" mini = "true" order="random" data-theme="#87faac"> </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener
+  btf.removeGlobalFnEvent('pjax')
+  btf.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
