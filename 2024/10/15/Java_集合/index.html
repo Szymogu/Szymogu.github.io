@@ -1,0 +1,405 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>集合 | Welcome,here is Mogu's Blog</title><meta name="author" content="Mogu"><meta name="copyright" content="Mogu"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="集合Collection所有单列集合祖宗接口 底下分为两类：List、Set List 添加的元素有序、可重复、有索引  有序：先进先出，类似c++的队列  可重复：数据值可重复  有索引：可通过索引访问元素   Set 添加的元素无序、不重复、无索引 常用方法 public boolean add(E e) 将给定对象添加到当前集合 对于List类型集合，不会添加失败；而Set类型集合由于不重复">
+<meta property="og:type" content="article">
+<meta property="og:title" content="集合">
+<meta property="og:url" content="https://szymogu.github.io/2024/10/15/Java_%E9%9B%86%E5%90%88/index.html">
+<meta property="og:site_name" content="Welcome,here is Mogu&#39;s Blog">
+<meta property="og:description" content="集合Collection所有单列集合祖宗接口 底下分为两类：List、Set List 添加的元素有序、可重复、有索引  有序：先进先出，类似c++的队列  可重复：数据值可重复  有索引：可通过索引访问元素   Set 添加的元素无序、不重复、无索引 常用方法 public boolean add(E e) 将给定对象添加到当前集合 对于List类型集合，不会添加失败；而Set类型集合由于不重复">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://szymogu.github.io/pic/default_cover/196577.png">
+<meta property="article:published_time" content="2024-10-15T05:42:09.000Z">
+<meta property="article:modified_time" content="2024-10-16T17:24:18.783Z">
+<meta property="article:author" content="Mogu">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="List">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://szymogu.github.io/pic/default_cover/196577.png"><link rel="shortcut icon" href="/pic/logo.png"><link rel="canonical" href="https://szymogu.github.io/2024/10/15/Java_%E9%9B%86%E5%90%88/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://chinese-fonts-cdn.deno.dev/packages/jnjj/dist/JUNJUN/result.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"You have switched to Traditional Chinese","cht_to_chs":"You have switched to Simplified Chinese","day_to_night":"You have switched to Dark Mode","night_to_day":"You have switched to Light Mode","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '集合',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-10-17 01:24:18'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/card-bg.css"><link rel="stylesheet" href="/css/neon.css"><link rel="stylesheet" href="/css/page-header.css"><link rel="stylesheet" href="/css/page-footer.css"><meta name="generator" content="Hexo 7.2.0"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+document.addEventListener('pjax:send', () => {
+  Pace.restart()
+})
+</script><link rel="stylesheet" href="/css/corner-indicator.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/touxiang.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">30</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">56</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">13</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> Gallery</span></a></li><li><a class="site-page child" href="/Java_Page/"><i class="fa-fw fas"></i><span> Test1</span></a></li><li><a class="site-page child" href="/Hexo_Page/"><i class="fa-fw fas"></i><span> Test2</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/pic/default_cover/196577.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Welcome,here is Mogu's Blog"><span class="site-name">Welcome,here is Mogu's Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> Gallery</span></a></li><li><a class="site-page child" href="/Java_Page/"><i class="fa-fw fas"></i><span> Test1</span></a></li><li><a class="site-page child" href="/Hexo_Page/"><i class="fa-fw fas"></i><span> Test2</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">集合</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-10-15T05:42:09.000Z" title="Created 2024-10-15 13:42:09">2024-10-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-10-16T17:24:18.783Z" title="Updated 2024-10-17 01:24:18">2024-10-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java/">Java</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="集合"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h1><h2 id="Collection"><a href="#Collection" class="headerlink" title="Collection"></a>Collection</h2><p>所有单列集合祖宗接口</p>
+<p>底下分为两类：List、Set</p>
+<p><strong>List</strong></p>
+<p>添加的元素有序、可重复、有索引</p>
+<ul>
+<li><p>有序：先进先出，类似c++的队列</p>
+</li>
+<li><p>可重复：数据值可重复</p>
+</li>
+<li><p>有索引：可通过索引访问元素</p>
+</li>
+</ul>
+<p><strong>Set</strong></p>
+<p>添加的元素无序、不重复、无索引</p>
+<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><ul>
+<li><p>public boolean add(E e)</p>
+<p>将给定对象添加到当前集合</p>
+<p>对于List类型集合，不会添加失败；而Set类型集合由于不重复特性，在添加一个已有元素时，会返回False</p>
+</li>
+<li><p>public void clear()</p>
+<p>清空集合</p>
+</li>
+<li><p>public boolean remove(E e)</p>
+<p>移除指定对象</p>
+<p>由于该方法属于Collection，Collection下的Set类型无索引，因此不能使用下标删除元素</p>
+</li>
+<li><p>public boolean contains(Object obj)</p>
+<p>判断当前集合是否包含指定对象</p>
+<p>如果集合中存储的是自定义对象，需要在类中重写equals方法：contains底层使用equals遍历判断集合中的元素是否等于给定元素，这里调用的是给定元素的equals方法，如果给定元素没有重写equals方法，就会使用其父类Object的equals方法：使用&#x3D;&#x3D;比较地址值，而我们多数时候希望比较值而不是地址，以至于会得到错误的结果</p>
+<p>*此外，一些java类已经重写了equals方法，如String：底层判断值是否相等。这些类就不用自己重写equals了</p>
+</li>
+<li><p>public boolean isEmpty()</p>
+<p>判断集合是否为空</p>
+</li>
+<li><p>public int size()</p>
+<p>返回元素个数</p>
+</li>
+</ul>
+<h2 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h2><p>集合有三种遍历方式</p>
+<ul>
+<li><p>迭代器遍历</p>
+</li>
+<li><p>增强for</p>
+</li>
+<li><p>Lambda表达式</p>
+</li>
+</ul>
+<h3 id="迭代器遍历"><a href="#迭代器遍历" class="headerlink" title="迭代器遍历"></a>迭代器遍历</h3><p>使用迭代器获取集合中的元素</p>
+<p>迭代器：类似于指针</p>
+<p>例：使用迭代器遍历集合并打印</p>
+<p>hasNext：当前位置是否存在元素</p>
+<p>next：返回当前元素并将迭代器向后移动1位</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ListTest</span> &#123;  </span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">main</span><span class="params">()</span>&#123;  </span><br><span class="line">        Collection&lt;String&gt; arr = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();  </span><br><span class="line">        arr.add(<span class="string">&quot;aaa&quot;</span>);  </span><br><span class="line">        arr.add(<span class="string">&quot;bbb&quot;</span>);  </span><br><span class="line">        arr.add(<span class="string">&quot;ccc&quot;</span>);  </span><br><span class="line">        arr.add(<span class="string">&quot;ddd&quot;</span>);  </span><br><span class="line">        Iterator&lt;String&gt; it=arr.iterator();  </span><br><span class="line">        <span class="keyword">while</span>(it.hasNext())&#123;  </span><br><span class="line">            System.out.println(it.next());  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>more details</strong></p>
+<p>1.迭代器指到空时获取元素报错<em>NoSuchElementException</em>，而不是<em>ArrayIndexOutOfBoundsException</em></p>
+<p>2.迭代器遍历完毕，指针不会复位</p>
+<p>3.循环时注意next与hasNext的配合使用</p>
+<p>4.迭代器遍历时，不能使用集合的方法进行添加或删除</p>
+<h3 id="增强for"><a href="#增强for" class="headerlink" title="增强for"></a>增强for</h3><p>底层就是迭代器，单列集合、数组可以使用</p>
+<p>for(类型 变量名 : 集合&#x2F;数组)</p>
+<p>例：使用增强for遍历集合</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (String s : arr) &#123;  </span><br><span class="line">    System.out.println(s);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h3><p>使用foreach遍历数组</p>
+<p>foreach需提供一个Consumer的实现类，先使用匿名内部类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">arr.forEach(<span class="keyword">new</span> <span class="title class_">Consumer</span>&lt;String&gt;() &#123;  </span><br><span class="line">    <span class="meta">@Override</span>  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">accept</span><span class="params">(String s)</span> &#123;  </span><br><span class="line">        System.out.println(s);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>wait，forEach干了什么？可以看一下源码</p>
+<p>*ArrayList下的forEach</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">forEach</span><span class="params">(Consumer&lt;? <span class="built_in">super</span> E&gt; action)</span> &#123;  </span><br><span class="line">    Objects.requireNonNull(action);  </span><br><span class="line">    <span class="keyword">final</span> <span class="type">int</span> <span class="variable">expectedModCount</span> <span class="operator">=</span> modCount;  </span><br><span class="line">    <span class="keyword">final</span> Object[] es = elementData;  </span><br><span class="line">    <span class="keyword">final</span> <span class="type">int</span> <span class="variable">size</span> <span class="operator">=</span> <span class="built_in">this</span>.size;  </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; modCount == expectedModCount &amp;&amp; i &lt; size; i++)  </span><br><span class="line">        action.accept(elementAt(es, i));  </span><br><span class="line">    <span class="keyword">if</span> (modCount != expectedModCount)  </span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">ConcurrentModificationException</span>();  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>关键在于👇</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; modCount == expectedModCount &amp;&amp; i &lt; size; i++)  </span><br><span class="line">        action.accept(elementAt(es, i)); </span><br></pre></td></tr></table></figure>
+
+<p>从集合中取出元素并使用accept方法处理，这个accept方法是谁的？就是内部类的</p>
+<p><strong>因此foreach干的事就是遍历集合，依次取元素并将每个元素传递给下面的方法</strong></p>
+<blockquote>
+<p>*ArrayList下的forEach</p>
+<p>为什么要强调用的是ArrayList下的forEach，这里实际上是重写了Iterable中的默认方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">default</span> <span class="keyword">void</span> <span class="title function_">forEach</span><span class="params">(Consumer&lt;? <span class="built_in">super</span> T&gt; action)</span> &#123;  </span><br><span class="line">    Objects.requireNonNull(action);  </span><br><span class="line">    <span class="keyword">for</span> (T t : <span class="built_in">this</span>) &#123;  </span><br><span class="line">        action.accept(t);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我当时以为使用的是Iterable的foreach，后来在阅读接口笔记的时候发现这类方法是可以被重写的，因此我找了一下这个集合的类型ArrayList是否重写了这个方法，结果是有的，即使用的是ArrayList下的forEach</p>
+<p>标出是因为我问人工智障他跟我说用的是Iterable下的，后来改口了</p>
+</blockquote>
+<p>再使用lambda偷懒</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.forEach(s-&gt;System.out.println(s));</span><br></pre></td></tr></table></figure>
+
+<h2 id="List"><a href="#List" class="headerlink" title="List"></a>List</h2><p>是一个接口，它是Collection接口的一个子接口，提供了对有序集合的操作</p>
+<p>由于List集合有索引，所有天骄了很多索引操作的方法</p>
+<p>常用方法</p>
+<ul>
+<li>void add(int index,E element)</li>
+</ul>
+<p>        在此集合中的指定位置插入指定的元素</p>
+<ul>
+<li><p>E remove(int index)</p>
+<p>删除指定索引出的元素，返回被删除的元素</p>
+</li>
+<li><p>E set(int index,E element)</p>
+<p>修改指定索引处的元素，返回被修改的元素</p>
+</li>
+<li><p>E get(int index)</p>
+<p>返回指定索引处的元素</p>
+</li>
+</ul>
+<p><strong>detail</strong></p>
+<p>add:</p>
+<p>在插入元素时，add的底层通过arraycopy将插入位后的元素复制到原数组中（元素后移），再将新元素加入数组</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> index, E element)</span> &#123;  </span><br><span class="line">    rangeCheckForAdd(index);  </span><br><span class="line">    modCount++;<span class="comment">//操作数+1  </span></span><br><span class="line">    <span class="keyword">final</span> <span class="type">int</span> s;  </span><br><span class="line">    Object[] elementData;  </span><br><span class="line">    <span class="keyword">if</span> ((s = size) == (elementData = <span class="built_in">this</span>.elementData).length)<span class="comment">//ArrayList是否满了  </span></span><br><span class="line">        elementData = grow();<span class="comment">//扩增  </span></span><br><span class="line">    System.arraycopy(elementData, index,  </span><br><span class="line">                     elementData, index + <span class="number">1</span>,  </span><br><span class="line">                     s - index);  </span><br><span class="line">    elementData[index] = element;  </span><br><span class="line">    size = s + <span class="number">1</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>remove:</p>
+<p>下列代码执行的是什么操作？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.remove(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+
+<p>A.删除索引为0的元素</p>
+<p>B.删除值为0的元素</p>
+<p>答案是A</p>
+<p>在调用方法时，如果方法出现了重载现象，会优先调用实参与形参一致的方法</p>
+<p>A选项对应的方法是remove(int index);</p>
+<p>B选项对应的方法是remove(Object o);</p>
+<p>此时提供的参数是0，也就是基本数据类型int，虽然它自动装箱后可以变成Integer，但A选项的优先级更高，因此这种情况会直接当成索引处理，<strong>而不会进行装箱</strong></p>
+<h3 id="遍历-1"><a href="#遍历-1" class="headerlink" title="遍历"></a>遍历</h3><ul>
+<li><p>迭代器遍历（继承自Collection）</p>
+</li>
+<li><p>列表迭代器遍历</p>
+<p>list的迭代器，允许在遍历过程中添加元素</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ListIterator&lt;String&gt; it = arr.listIterator();  </span><br><span class="line"><span class="keyword">while</span>(it.hasNext())&#123;  </span><br><span class="line">    <span class="type">String</span> <span class="variable">a</span> <span class="operator">=</span> it.next();  </span><br><span class="line">    <span class="keyword">if</span>(a.equals(<span class="string">&quot;bbb&quot;</span>))&#123;  </span><br><span class="line">        it.add(<span class="string">&quot;bbbb&quot;</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>与next相对，有一个previous；与hasNext相对，有一个hasPrevious</p>
+</li>
+<li><p>增强for（继承自Collection）</p>
+</li>
+<li><p>Lambda表达式（继承自Collection）</p>
+</li>
+<li><p>普通for</p>
+<p>通过get方法可以用下标获取元素</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arr.size(); i++) &#123;  </span><br><span class="line">    System.out.println(arr.get(i));  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>List下三种结构的底层分析：</p>
+<p><strong>ArrayList</strong></p>
+<p>底层数据结构：数组</p>
+<ul>
+<li><p>利用空参创建的集合，在底层创建一个默认长度为0的数组</p>
+</li>
+<li><p>添加第一个元素时，底层会创建一个新的长度为10的数组</p>
+</li>
+<li><p>存满时，会扩容1.5倍</p>
+</li>
+<li><p>如果一次添加多个元素，1.5倍还放不下，则新创建数组的长度以实际为准</p>
+</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/..%5Cpic%5CBlog_img%5CJavaList%5CArrayListSource.png"></p>
+<p><strong>LinkedList</strong></p>
+<p>底层数据结构：双向链表</p>
+<ul>
+<li>内部类Node，表示节点</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/..%5Cpic%5CBlog_img%5CJavaList%5CLinkListSource.png"></p>
+<p><strong>Iterator</strong></p>
+<p>迭代器<del>（你怎么进来的）</del></p>
+<ul>
+<li><p>调用迭代器构造方法时，会创建内部类Itr对象，这个对象里面的属性有</p>
+<p>1.cursor：当前索引</p>
+<p>2.lastRet：上一次操作的索引</p>
+<p>3.expectedModCount：修改次数</p>
+</li>
+<li><p>通过next()方法遍历集合时，先检查是否存在并发修改异常：expectedModCount&#x3D;&#x3D;modCount？不相等时会抛出异常</p>
+<p>通过cursor获取当前位置，做一些判断后，将当前位置赋值给lastRet并返回当前位置的值</p>
+</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/..%5Cpic%5CBlog_img%5CJavaList%5CIteratorSource.png"></p>
+<p><strong>Vector</strong></p>
+<p>底层数据结构：数组</p>
+<p>类似于ArrayList，但Vector是同步的，这意味着它是线程安全的。Vector是Java早期版本中的一个类，随着Java集合框架的发展，Vector逐渐被ArrayList和LinkedList所取代</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://szymogu.github.io">Mogu</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://szymogu.github.io/2024/10/15/Java_%E9%9B%86%E5%90%88/">https://szymogu.github.io/2024/10/15/Java_%E9%9B%86%E5%90%88/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Java/">Java</a><a class="post-meta__tags" href="/tags/List/">List</a></div><div class="post_share"><div class="social-share" data-image="/pic/default_cover/196577.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/10/17/Java_%E6%B3%9B%E5%9E%8B/" title="泛型"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/67603.png" onerror="onerror=null;src='https://i0.hdslb.com/bfs/static/laputa-search/assets/neterror.65668da4.png'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">泛型</div></div></a></div><div class="next-post pull-right"><a href="/2024/10/13/Java_Lambda/" title="Lambda表达式"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/824618.png" onerror="onerror=null;src='https://i0.hdslb.com/bfs/static/laputa-search/assets/neterror.65668da4.png'" alt="cover of next post"><div class="pagination-info"><div class="label">Next</div><div class="next_info">Lambda表达式</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2024/06/21/Java_ArrayList/" title="Java_ArrayList"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/939416.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-21</div><div class="title">Java_ArrayList</div></div></a></div><div><a href="/2024/06/24/Java_Polymorphism/" title="多态"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/569411.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-24</div><div class="title">多态</div></div></a></div><div><a href="/2024/06/21/Java_extends/" title="Java_extends"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/169994.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-21</div><div class="title">Java_extends</div></div></a></div><div><a href="/2024/10/12/Java_Arrays/" title="Arrays"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/520815.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-10-12</div><div class="title">Arrays</div></div></a></div><div><a href="/2024/06/24/Java_abstract-Interface/" title="abstract&amp;接口"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/73157.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-24</div><div class="title">abstract&amp;接口</div></div></a></div><div><a href="/2024/10/13/Java_Lambda/" title="Lambda表达式"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/824618.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-10-13</div><div class="title">Lambda表达式</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/touxiang.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Mogu</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">30</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">56</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">13</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Szymogu"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">I❤️BlueArchive！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9B%86%E5%90%88"><span class="toc-number">1.</span> <span class="toc-text">集合</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Collection"><span class="toc-number">1.1.</span> <span class="toc-text">Collection</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">1.1.1.</span> <span class="toc-text">常用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%81%8D%E5%8E%86"><span class="toc-number">1.2.</span> <span class="toc-text">遍历</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E9%81%8D%E5%8E%86"><span class="toc-number">1.2.1.</span> <span class="toc-text">迭代器遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A2%9E%E5%BC%BAfor"><span class="toc-number">1.2.2.</span> <span class="toc-text">增强for</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">1.2.3.</span> <span class="toc-text">Lambda表达式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#List"><span class="toc-number">1.3.</span> <span class="toc-text">List</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%8D%E5%8E%86-1"><span class="toc-number">1.3.1.</span> <span class="toc-text">遍历</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/10/17/Java_%E6%B3%9B%E5%9E%8B/" title="泛型"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/67603.png" onerror="this.onerror=null;this.src='https://i0.hdslb.com/bfs/static/laputa-search/assets/neterror.65668da4.png'" alt="泛型"/></a><div class="content"><a class="title" href="/2024/10/17/Java_%E6%B3%9B%E5%9E%8B/" title="泛型">泛型</a><time datetime="2024-10-16T17:25:00.000Z" title="Created 2024-10-17 01:25:00">2024-10-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/15/Java_%E9%9B%86%E5%90%88/" title="集合"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/196577.png" onerror="this.onerror=null;this.src='https://i0.hdslb.com/bfs/static/laputa-search/assets/neterror.65668da4.png'" alt="集合"/></a><div class="content"><a class="title" href="/2024/10/15/Java_%E9%9B%86%E5%90%88/" title="集合">集合</a><time datetime="2024-10-15T05:42:09.000Z" title="Created 2024-10-15 13:42:09">2024-10-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/13/Java_Lambda/" title="Lambda表达式"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/824618.png" onerror="this.onerror=null;this.src='https://i0.hdslb.com/bfs/static/laputa-search/assets/neterror.65668da4.png'" alt="Lambda表达式"/></a><div class="content"><a class="title" href="/2024/10/13/Java_Lambda/" title="Lambda表达式">Lambda表达式</a><time datetime="2024-10-12T19:53:56.000Z" title="Created 2024-10-13 03:53:56">2024-10-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/12/Java_Arrays/" title="Arrays"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/520815.png" onerror="this.onerror=null;this.src='https://i0.hdslb.com/bfs/static/laputa-search/assets/neterror.65668da4.png'" alt="Arrays"/></a><div class="content"><a class="title" href="/2024/10/12/Java_Arrays/" title="Arrays">Arrays</a><time datetime="2024-10-11T20:45:38.000Z" title="Created 2024-10-12 04:45:38">2024-10-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/04/Java_BigIntegerAndBigDecimal/" title="BigIntegerAndBigDecimal"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/424358.png" onerror="this.onerror=null;this.src='https://i0.hdslb.com/bfs/static/laputa-search/assets/neterror.65668da4.png'" alt="BigIntegerAndBigDecimal"/></a><div class="content"><a class="title" href="/2024/10/04/Java_BigIntegerAndBigDecimal/" title="BigIntegerAndBigDecimal">BigIntegerAndBigDecimal</a><time datetime="2024-10-04T13:27:47.000Z" title="Created 2024-10-04 21:27:47">2024-10-04</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.8.8/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><div class="js-pjax"></div><div class="aplayer no-destroy" data-id="10187364968" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="false" mini = "true" order="random" data-theme="#87faac"> </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener
+  btf.removeGlobalFnEvent('pjax')
+  btf.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
