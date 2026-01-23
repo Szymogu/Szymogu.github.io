@@ -1,0 +1,323 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Java_时间类 | Welcome,here is Mogu's Blog</title><meta name="author" content="Mogu"><meta name="copyright" content="Mogu"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="时间类 Date类空参构造会获取本机当前时间，可接受参数类型long，代表当前时间距时间起始位置的毫秒值 setTime方法：修改时间对象的毫秒值 getTime方法：获取时间对象的毫秒值 例：时间开始一年后的日期 12345678private static void extracted()&#123;      Date date &#x3D; new Date(0L);      long time">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java_时间类">
+<meta property="og:url" content="https://szymogu.github.io/2026/01/24/Java_Date/index.html">
+<meta property="og:site_name" content="Welcome,here is Mogu&#39;s Blog">
+<meta property="og:description" content="时间类 Date类空参构造会获取本机当前时间，可接受参数类型long，代表当前时间距时间起始位置的毫秒值 setTime方法：修改时间对象的毫秒值 getTime方法：获取时间对象的毫秒值 例：时间开始一年后的日期 12345678private static void extracted()&#123;      Date date &#x3D; new Date(0L);      long time">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://szymogu.github.io/pic/default_cover/150963.png">
+<meta property="article:published_time" content="2026-01-23T18:46:42.000Z">
+<meta property="article:modified_time" content="2026-01-23T18:48:58.256Z">
+<meta property="article:author" content="Mogu">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://szymogu.github.io/pic/default_cover/150963.png"><link rel="shortcut icon" href="/pic/logo.png"><link rel="canonical" href="https://szymogu.github.io/2026/01/24/Java_Date/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://chinese-fonts-cdn.deno.dev/packages/jnjj/dist/JUNJUN/result.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"You have switched to Traditional Chinese","cht_to_chs":"You have switched to Simplified Chinese","day_to_night":"You have switched to Dark Mode","night_to_day":"You have switched to Light Mode","bgLight":"#87cefa","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Java_时间类',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-01-24 02:48:58'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/card-bg.css"><link rel="stylesheet" href="/css/neon.css"><link rel="stylesheet" href="/css/page-header.css"><link rel="stylesheet" href="/css/page-footer.css"><meta name="generator" content="Hexo 7.2.0"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+document.addEventListener('pjax:send', () => {
+  Pace.restart()
+})
+</script><link rel="stylesheet" href="/css/corner-indicator.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/touxiang.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">57</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">42</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">17</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> Gallery</span></a></li><li><a class="site-page child" href="/Java_Page/"><i class="fa-fw fas"></i><span> Test1</span></a></li><li><a class="site-page child" href="/Hexo_Page/"><i class="fa-fw fas"></i><span> Test2</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/pic/default_cover/150963.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Welcome,here is Mogu's Blog"><span class="site-name">Welcome,here is Mogu's Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> Gallery</span></a></li><li><a class="site-page child" href="/Java_Page/"><i class="fa-fw fas"></i><span> Test1</span></a></li><li><a class="site-page child" href="/Hexo_Page/"><i class="fa-fw fas"></i><span> Test2</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Java_时间类</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-01-23T18:46:42.000Z" title="Created 2026-01-24 02:46:42">2026-01-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-01-23T18:48:58.256Z" title="Updated 2026-01-24 02:48:58">2026-01-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java/">Java</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Java_时间类"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>时间类</p>
+<h2 id="Date类"><a href="#Date类" class="headerlink" title="Date类"></a>Date类</h2><p>空参构造会获取本机当前时间，可接受参数类型long，代表当前时间距时间起始位置的毫秒值</p>
+<p>setTime方法：修改时间对象的毫秒值</p>
+<p>getTime方法：获取时间对象的毫秒值</p>
+<p>例：时间开始一年后的日期</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">extracted</span><span class="params">()</span>&#123;</span><br><span class="line">      <span class="type">Date</span> <span class="variable">date</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Date</span>(<span class="number">0L</span>);</span><br><span class="line">      <span class="type">long</span> <span class="variable">time</span> <span class="operator">=</span> date.getTime();</span><br><span class="line">      time+=<span class="number">1000L</span>*<span class="number">60</span>*<span class="number">60</span>*<span class="number">24</span>*<span class="number">365</span>;</span><br><span class="line">      System.out.println(time);</span><br><span class="line">      date.setTime(time);</span><br><span class="line">      System.out.println(date);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="SimpleDateFormat"><a href="#SimpleDateFormat" class="headerlink" title="SimpleDateFormat"></a>SimpleDateFormat</h2><p>通过模式字符串来定义日期时间的格式</p>
+<p>构造函数空参时会创建一个默认的日期格式</p>
+<p>可以接收一个String类型参数指定格式</p>
+<p>格式化的时间形式的常用的模式对应关系如下：</p>
+<ul>
+<li>y: 年</li>
+<li>M: 月</li>
+<li>d: 日</li>
+<li>H: 24小时制的小时</li>
+<li>h: 12小时制的小时</li>
+<li>m: 分钟</li>
+<li>s: 秒</li>
+<li>S: 毫秒</li>
+<li>E: 星期几</li>
+<li>D: 一年中的第几天</li>
+<li>F: 月份中的第几个星期几</li>
+<li>w: 一年中的第几个星期</li>
+<li>W: 月份中的第几个星期</li>
+<li>k: 24小时制的小时（1开始）</li>
+<li>K: 12小时制的小时（0开始）</li>
+<li>z: 时区</li>
+<li>Z: 时区的RFC 822格式</li>
+<li>v: 时区的通用协调（协调世界时）</li>
+<li>a: 上午或下午的标记</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">SimpleDateFormat</span> <span class="variable">simpleDateFormat2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;yyyy-MM-dd&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><p>format：日期对象（参数类型Date）-》字符串</p>
+<p>parse：字符串（参数类型String）-》日期对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">timeChanging</span><span class="params">()</span> <span class="keyword">throws</span> ParseException &#123;  </span><br><span class="line">    <span class="comment">//将2000-11-11转成2000年11月11日  </span></span><br><span class="line">    String birthday=<span class="string">&quot;2000-11-11&quot;</span>;  </span><br><span class="line">    <span class="comment">//将2000-11-11解析为日期  </span></span><br><span class="line">    <span class="type">SimpleDateFormat</span> <span class="variable">simpleDateFormat</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;yyyy-MM-dd&quot;</span>);  </span><br><span class="line">    <span class="type">Date</span> <span class="variable">date</span> <span class="operator">=</span> simpleDateFormat.parse(birthday);  </span><br><span class="line">    <span class="comment">//向指定格式_年_月_日中传入日期  </span></span><br><span class="line">    <span class="type">SimpleDateFormat</span> <span class="variable">simpleDateFormat2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;yyyy年MM月dd日&quot;</span>);  </span><br><span class="line">    <span class="type">String</span> <span class="variable">result</span> <span class="operator">=</span> simpleDateFormat2.format(date);  </span><br><span class="line">    System.out.println(result);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>练习：判断某个时间是否在一段时间内</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">kdj</span><span class="params">()</span> <span class="keyword">throws</span> ParseException &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">startTime</span> <span class="operator">=</span> <span class="string">&quot;2023年11月11日 0:0:0&quot;</span>;</span><br><span class="line">    <span class="type">String</span> <span class="variable">endTime</span> <span class="operator">=</span> <span class="string">&quot;2023年11月11日 0:10:0&quot;</span>;</span><br><span class="line">    <span class="type">String</span> <span class="variable">orderTime</span> <span class="operator">=</span> <span class="string">&quot;2023年11月11日 0:11:0&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">SimpleDateFormat</span> <span class="variable">simpleDateFormat</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;yyyy年MM月dd日 hh:mm:ss&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span>(simpleDateFormat.parse(startTime).getTime()&lt;=simpleDateFormat.parse(orderTime).getTime()&amp;&amp;simpleDateFormat.parse(endTime).getTime()&gt;=simpleDateFormat.parse(orderTime).getTime())&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;success&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;fail&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Canlendar"><a href="#Canlendar" class="headerlink" title="Canlendar"></a>Canlendar</h2><p>代表了系统当前时间的日历对象，可以单独修改、获取时间中的年，月，日</p>
+<p>Calendar是一个抽象类，不能直接创建对象</p>
+<p>使用getInstance()获取当前时间的日历对象</p>
+<h3 id="常用方法-1"><a href="#常用方法-1" class="headerlink" title="常用方法"></a>常用方法</h3><p>public final Date getTime()</p>
+<p>获取日期对象</p>
+<p>public final setTime(Date date)</p>
+<p>给日历设置日期对象</p>
+<p>public long getTimeInMillis()<br>拿到时间毫秒值<br>public void setTimeInMillis(long millis)<br>给日历设置时间毫秒值<br>public int get(int field)</p>
+<p>取日历中的某个字段信息</p>
+<p>public void set(int field,int value)</p>
+<p>修改日历的某个字段信息</p>
+<p>public void add(int field,int amount)<br>为某个字段增加&#x2F;减少指定的值</p>
+<p>注意：</p>
+<p>日历类中月份的范围:0~11<br>日历类中星期的特点:星期日是一周中的第一天</p>
+<h2 id="JDK8时间"><a href="#JDK8时间" class="headerlink" title="JDK8时间"></a>JDK8时间</h2><h3 id="Date"><a href="#Date" class="headerlink" title="Date"></a>Date</h3><p><strong>1.ZoneId:时区</strong></p>
+<p>static set<string> getAvailablezonelds()</p>
+<p>获取Java中支持的所有时区</p>
+<p>static ZoneId systemDefault()<br>获取系统默认时区</p>
+<p>static ZoneId of(string zoneId)<br>获取一个指定时区</p>
+<p><strong>2.Instant:时间戳</strong></p>
+<p>static Intant now() 获取当前时间的Instant对象</p>
+<p>static Instant ofXxxx(long epochMilli) 初始化一个Instant对象</p>
+<p>ZonedDateTime atZone(ZoneId zone) 指定时区</p>
+<p>boolean isXxx(Instant otherInstant) 判断</p>
+<p>Instant minusXxx(long millisToSubtract) 减</p>
+<p>Instant plusXxx(long millisToSubtract) 加</p>
+<blockquote>
+<p>jdk8之后新增的时间类都是不可变的，上面的加减方法都是返回一个新对象，不会改动</p>
+</blockquote>
+<p><strong>3.ZoneDateTime:带时区的时间</strong></p>
+<p>static ZonedDateTime now() 获取当前时间的ZonedDateTime对象（带时区）</p>
+<p>static ZonedDateTime ofXxx() 获取指定时间的ZonedDateTime对象（带时区）</p>
+<p>ZonedDateTime withXxx() 修改时间</p>
+<p>ZonedDateTime minusXxx() 减</p>
+<p>ZonedDateTime plusXxx() 加</p>
+<h3 id="日期格式化类"><a href="#日期格式化类" class="headerlink" title="日期格式化类"></a>日期格式化类</h3><p><strong>SimpleDateFormat</strong></p>
+<p>Static DateTimeFormatter ofPattern() 获取格式对象（指定格式）</p>
+<p>String format() 格式化</p>
+<h2 id="日历"><a href="#日历" class="headerlink" title="日历"></a>日历</h2><p><strong>LocalDate：年、月、日</strong></p>
+<p><strong>LocalTime：时、分、秒</strong></p>
+<p><strong>LocalDateTime：年、月、日、时、分、秒</strong></p>
+<p>static now() 获取当前时间的对象</p>
+<p>static of() 获取指定时间的对象</p>
+<p>getXxx() 获取日历中年、月、日、时、分、秒等信息</p>
+<p>isBefore() isAfter() 比较</p>
+<p>withXxx() 修改（为）</p>
+<p>minusXxx() 减</p>
+<p>plusXxx() 加</p>
+<p><strong>工具</strong></p>
+<p><strong>Duration 时间间隔（秒、纳秒）</strong></p>
+<p><strong>Period 时间间隔（年、月、日）</strong></p>
+<p><strong>ChronoUnit 时间间隔（通用）</strong></p>
+<p>between() 计算时间间隔</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://szymogu.github.io">Mogu</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://szymogu.github.io/2026/01/24/Java_Date/">https://szymogu.github.io/2026/01/24/Java_Date/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Java/">Java</a></div><div class="post_share"><div class="social-share" data-image="/pic/default_cover/150963.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2025/08/08/Springboot%E5%AE%9E%E6%88%98_day12/" title="Springboot实战_day12"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/67603.png" onerror="onerror=null;src='https://i0.hdslb.com/bfs/static/laputa-search/assets/neterror.65668da4.png'" alt="cover of next post"><div class="pagination-info"><div class="label">Next</div><div class="next_info">Springboot实战_day12</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2024/06/24/Java_Polymorphism/" title="Java_多态"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/569411.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-24</div><div class="title">Java_多态</div></div></a></div><div><a href="/2024/06/21/Java_ArrayList/" title="Java_ArrayList"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/449110.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-21</div><div class="title">Java_ArrayList</div></div></a></div><div><a href="/2024/10/04/Java_BigIntegerAndBigDecimal/" title="Java_BigIntegerAndBigDecimal"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/449110.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-10-04</div><div class="title">Java_BigIntegerAndBigDecimal</div></div></a></div><div><a href="/2024/10/12/Java_Arrays/" title="Java_Arrays"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/42676.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-10-12</div><div class="title">Java_Arrays</div></div></a></div><div><a href="/2024/10/13/Java_Lambda/" title="Java_Lambda表达式"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/67603.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-10-13</div><div class="title">Java_Lambda表达式</div></div></a></div><div><a href="/2024/06/24/Java_abstract-Interface/" title="Java_abstract&amp;接口"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/67603.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-24</div><div class="title">Java_abstract&amp;接口</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/touxiang.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Mogu</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">57</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">42</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">17</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Szymogu"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">I❤️BlueArchive！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Date%E7%B1%BB"><span class="toc-number">1.</span> <span class="toc-text">Date类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SimpleDateFormat"><span class="toc-number">2.</span> <span class="toc-text">SimpleDateFormat</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">2.1.</span> <span class="toc-text">常用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Canlendar"><span class="toc-number">3.</span> <span class="toc-text">Canlendar</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95-1"><span class="toc-number">3.1.</span> <span class="toc-text">常用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JDK8%E6%97%B6%E9%97%B4"><span class="toc-number">4.</span> <span class="toc-text">JDK8时间</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Date"><span class="toc-number">4.1.</span> <span class="toc-text">Date</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E5%8C%96%E7%B1%BB"><span class="toc-number">4.2.</span> <span class="toc-text">日期格式化类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A5%E5%8E%86"><span class="toc-number">5.</span> <span class="toc-text">日历</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/01/24/Java_Date/" title="Java_时间类"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/150963.png" onerror="this.onerror=null;this.src='https://i0.hdslb.com/bfs/static/laputa-search/assets/neterror.65668da4.png'" alt="Java_时间类"/></a><div class="content"><a class="title" href="/2026/01/24/Java_Date/" title="Java_时间类">Java_时间类</a><time datetime="2026-01-23T18:46:42.000Z" title="Created 2026-01-24 02:46:42">2026-01-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/08/Springboot%E5%AE%9E%E6%88%98_day12/" title="Springboot实战_day12"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/67603.png" onerror="this.onerror=null;this.src='https://i0.hdslb.com/bfs/static/laputa-search/assets/neterror.65668da4.png'" alt="Springboot实战_day12"/></a><div class="content"><a class="title" href="/2025/08/08/Springboot%E5%AE%9E%E6%88%98_day12/" title="Springboot实战_day12">Springboot实战_day12</a><time datetime="2025-08-07T16:08:06.000Z" title="Created 2025-08-08 00:08:06">2025-08-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/07/Springboot%E5%AE%9E%E6%88%98_day11/" title="Springboot实战_day11"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/397352.png" onerror="this.onerror=null;this.src='https://i0.hdslb.com/bfs/static/laputa-search/assets/neterror.65668da4.png'" alt="Springboot实战_day11"/></a><div class="content"><a class="title" href="/2025/08/07/Springboot%E5%AE%9E%E6%88%98_day11/" title="Springboot实战_day11">Springboot实战_day11</a><time datetime="2025-08-06T17:05:29.000Z" title="Created 2025-08-07 01:05:29">2025-08-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/05/Springboot%E5%AE%9E%E6%88%98_day10/" title="Springboot实战_day10"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/400957.png" onerror="this.onerror=null;this.src='https://i0.hdslb.com/bfs/static/laputa-search/assets/neterror.65668da4.png'" alt="Springboot实战_day10"/></a><div class="content"><a class="title" href="/2025/08/05/Springboot%E5%AE%9E%E6%88%98_day10/" title="Springboot实战_day10">Springboot实战_day10</a><time datetime="2025-08-05T15:32:17.000Z" title="Created 2025-08-05 23:32:17">2025-08-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/07/29/Springboot%E5%AE%9E%E6%88%98_day5/" title="Springboot实战_day5"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/pic/default_cover/939416.png" onerror="this.onerror=null;this.src='https://i0.hdslb.com/bfs/static/laputa-search/assets/neterror.65668da4.png'" alt="Springboot实战_day5"/></a><div class="content"><a class="title" href="/2025/07/29/Springboot%E5%AE%9E%E6%88%98_day5/" title="Springboot实战_day5">Springboot实战_day5</a><time datetime="2025-07-28T21:18:38.000Z" title="Created 2025-07-29 05:18:38">2025-07-29</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.8.8/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><div class="js-pjax"></div><div class="aplayer no-destroy" data-id="10187364968" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="false" mini = "true" order="random" data-theme="#87faac"> </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener
+  btf.removeGlobalFnEvent('pjax')
+  btf.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
